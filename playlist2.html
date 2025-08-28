@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🎧 Playlist Estetik Gelap</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-bg: #121212;
+      --secondary-bg: #1e1e1e;
+      --accent: #1db954; /* Spotify Green */
+      --text-color: #ffffff;
+      --subtext: #aaaaaa;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+      color: var(--text-color);
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background: var(--secondary-bg);
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2.5em;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .song {
+      display: flex;
+      align-items: center;
+      background: #2a2a2a;
+      border-radius: 15px;
+      margin-bottom: 25px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .song:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 15px var(--accent);
+    }
+
+    .cover {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+    }
+
+    .info {
+      flex: 1;
+      padding: 15px 20px;
+    }
+
+    .info h3 {
+      font-size: 1.1em;
+      margin-bottom: 5px;
+      color: var(--text-color);
+    }
+
+    .info p {
+      font-size: 0.9em;
+      color: var(--subtext);
+      margin-bottom: 10px;
+    }
+
+    audio {
+      width: 100%;
+      filter: drop-shadow(0 0 5px var(--accent));
+    }
+
+    @media (max-width: 600px) {
+      .song {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .cover {
+        width: 100%;
+        height: 180px;
+      }
+
+      .info {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg" width="120" alt="Spotify Logo">
+
+    <h1> Playlist Galau</h1>
+
+    <!-- Lagu 1 -->
+    <div class="song" id="masing masing">
+      <img src="masing masing.jpg" alt="Cover" class="cover" alt="masing masing" />
+      <div class="info">
+        <h3>Masing Masing</h3>
+        <p>Ade Govinda & Ernie Zakri</p>
+        <audio controls>
+          <source src="Ade Govinda & Ernie Zakri - Masing-Masing (Lirik) [eqI4IrmTHBY].mp3" type="audio/mpeg">
+        </audio>
+      </div>
+    </div>
+
+    <!-- Lagu 2 -->
+    <div class="song" id="satu bulan">
+      <img src="satu bulan.jpg" alt="Cover" class="cover" alt="satu bulan" />
+      <div class="info">
+        <h3>Satu Bulan</h3>
+        <p>Bernadya</p>
+        <audio controls>
+          <source src="Bernadya - Satu Bulan (Official Lyric Video) [7Jm2Il2U-c0].mp3" type="audio/mpeg">
+        </audio>
+      </div>
+    </div>
+
+    <!-- Lagu 3 -->
+    <div class="song" id="mengenangmu">
+      <img src="mgenangmu.jpg" alt="Cover" class="cover" alt="mengenangmu" />
+      <div class="info">
+        <h3>Mengenangmu</h3>
+        <p>Keris Patih</p>
+        <audio controls>
+          <source src="Kerispatih - Mengenangmu _ Lirik Lagu [FPcUx7Bassk].mp3" type="audio/mpeg">
+        </audio>
+      </div>
+    </div>
+
+    <!-- Lagu 4 -->
+    <div class="song" id="tampar">
+      <img src="tampar.jpg" alt="Cover" class="cover" alt="tampar" />
+      <div class="info">
+        <h3>Tampar</h3>
+        <p>Juicy Luicy</p>
+        <audio controls>
+          <source src="Juicy Luicy - Tampar (Official Lyric Video) [qmgA_WejI8w].mp3" type="audio/mpeg">
+        </audio>
+      </div>
+    </div>
+
+    <!-- Lagu 5 -->
+    <div class="song" id="tanpa pesan terakhir">
+      <img src="tanpa pesan terakhir.jpg" alt="Cover" class="cover" alt="tanpa pesan terakhir" />
+      <div class="info">
+        <h3>Tanpa Pesan Terakhir</h3>
+        <p>Seventeen</p>
+        <audio controls>
+          <source src="Seventeen - Tanpa Pesan Terakhir [Hyf1nTcuang].mp3" type="audio/mpeg">
+        </audio>
+      </div>
+    </div>
+<div style="margin-bottom: 20px;">
+  <a href="index.html" style="
+    color: #1db954;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 8px 15px;
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    display: inline-block;
+    transition: background 0.3s;
+  " onmouseover="this.style.background='#1db954'; this.style.color='#121212';"
+     onmouseout="this.style.background='#2a2a2a'; this.style.color='#1db954';">
+    🔙 Kembali ke Home
+  </a>
+</div>
+
+    <!-- Tambahkan lagu tambahan di sini -->
+
+  </div>
+
+</body>
+</html>

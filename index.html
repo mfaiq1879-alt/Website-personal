@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home - Playlist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-dark: #121212;
+      --bg-light: #1e1e1e;
+      --accent: #1db954;
+      --text: #ffffff;
+      --subtext: #aaaaaa;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 240px;
+      background: var(--bg-light);
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar img {
+      width: 120px;
+      margin-bottom: 20px;
+    }
+    .sidebar input {
+      margin-bottom: 20px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: none;
+      background: #1f1f1f;
+      color: white;
+      width: 100%;
+      font-size: 0.9rem;
+    }
+    .nav a {
+      text-decoration: none;
+      color: var(--subtext);
+      padding: 12px 0;
+      display: block;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    .nav a:hover, .nav a.active {
+      color: var(--accent);
+    }
+    .main {
+      flex: 1;
+      padding: 60px 40px;
+    }
+    h1 {
+      font-size: 2.5em;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .desc {
+      font-size: 1.2em;
+      color: var(--subtext);
+      margin-bottom: 30px;
+    }
+    .playlist-list a {
+      display: block;
+      padding: 12px 20px;
+      margin-bottom: 10px;
+      background: #1f1f1f;
+      border-radius: 10px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    .playlist-list a:hover {
+      background: var(--accent);
+      color: #121212;
+    }
+    @media (max-width: 768px) {
+      .sidebar {
+        flex-direction: row;
+        width: 100%;
+        padding: 15px;
+        justify-content: space-between;
+      }
+      .sidebar img {
+        width: 100px;
+      }
+      .nav {
+        display: flex;
+        gap: 20px;
+      }
+      .main {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg" alt="Logo" />
+
+    <!-- Input pencarian -->
+    <input type="text" id="searchInput" placeholder="🔍 Cari lagu..." />
+
+    <!-- Menu navigasi -->
+    <div class="nav">
+      <a href="index.html" class="active">🏠 Home</a>
+      <a href="playlist1.html">🎵 Playlist 1</a>
+      <a href="playlist2.html">🎶 Playlist 2</a>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <h1>Selamat Datang Di Web Muhammad Faiq 👋</h1>
+    <p class="desc">Nikmati berbagai playlist estetik favoritmu dalam suasana gelap ala Spotify.</p>
+
+    <!-- Playlist utama (rekomendasi, tampil kalau input kosong) -->
+    <div class="playlist-list" id="playlistList">
+      <a href="playlist1.html">🎵 Playlist 1 - Lagu Cinta: Dan, Penjaga Hati, Lesung pipi, monolog, Abadi</a>
+      <a href="playlist2.html">🎶 Playlist 2 - Lagu Galau: Tampar, Masing Masing, Satu Bulan, Mengenangmu, Tanpa Pesan Terakhir</a>
+    </div>
+  </div>
+
+  <!-- Script pencarian dan redirect -->
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const playlistList = document.getElementById('playlistList');
+
+    const songs = [
+      { title: "Abadi", url: "playlist1.html#abadi" },
+      { title: "Dan", url: "playlist1.html#dan" },
+      { title: "Penjaga Hati", url: "playlist1.html#penjaga-hati" },
+      { title: "Monolog", url: "playlist1.html#monolog" },
+      { title: "Lesung Pipi", url: "playlist1.html#lesung-pipi" },
+      { title: "Masing Masing", url: "playlist2.html#masing-masing" },
+      { title: "Satu BUlan", url: "playlist2.html#satu-bulan" },
+      { title: "Tampar", url: "playlist2.html#tampar" },
+      { title: "Mengenangmu", url: "playlist2.html#mengenangmu" },
+      { title: "Tanpa Pesan Terakhir", url: "playlist2.html#tanpa-pesan-terakhir" }
+    ];
+
+    // Buat datalist untuk autocomplete
+    const datalist = document.createElement("datalist");
+    datalist.id = "songSuggestions";
+    songs.forEach(song => {
+      const option = document.createElement("option");
+      option.value = song.title;
+      datalist.appendChild(option);
+    });
+    document.body.appendChild(datalist);
+    searchInput.setAttribute("list", "songSuggestions");
+
+    // Saat user ketik (input event), sembunyikan playlist utama jika ada teks di input
+    searchInput.addEventListener("input", () => {
+      if (searchInput.value.trim() === "") {
+        playlistList.style.display = "block";
+      } else {
+        playlistList.style.display = "none";
+      }
+    });
+
+    // Saat user tekan Enter → redirect ke playlist & lagu yang cocok
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        const query = searchInput.value.toLowerCase().trim();
+        const found = songs.find(song => song.title.toLowerCase() === query);
+        if (found) {
+          window.location.href = found.url;
+        } else {
+          alert("Lagu tidak ditemukan.");
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
