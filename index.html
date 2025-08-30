@@ -13,14 +13,26 @@
       --text: #ffffff;
       --subtext: #aaaaaa;
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
       background: var(--bg-dark);
       color: var(--text);
+    }
+
+    .container {
       display: flex;
+      flex-direction: row;
+      width: 100%;
       min-height: 100vh;
     }
+
     .sidebar {
       width: 240px;
       background: var(--bg-light);
@@ -28,10 +40,12 @@
       display: flex;
       flex-direction: column;
     }
+
     .sidebar img {
       width: 120px;
       margin-bottom: 20px;
     }
+
     .sidebar input {
       margin-bottom: 20px;
       padding: 10px 12px;
@@ -42,6 +56,7 @@
       width: 100%;
       font-size: 0.9rem;
     }
+
     .nav a {
       text-decoration: none;
       color: var(--subtext);
@@ -50,23 +65,29 @@
       font-weight: 500;
       transition: 0.2s;
     }
-    .nav a:hover, .nav a.active {
+
+    .nav a:hover,
+    .nav a.active {
       color: var(--accent);
     }
+
     .main {
       flex: 1;
       padding: 60px 40px;
     }
+
     h1 {
       font-size: 2.5em;
       color: var(--accent);
       margin-bottom: 20px;
     }
+
     .desc {
       font-size: 1.2em;
       color: var(--subtext);
       margin-bottom: 30px;
     }
+
     .playlist-list a {
       display: block;
       padding: 12px 20px;
@@ -78,63 +99,94 @@
       font-weight: 500;
       transition: 0.2s;
     }
+
     .playlist-list a:hover {
       background: var(--accent);
       color: #121212;
     }
+
     @media (max-width: 768px) {
-      .sidebar {
-        flex-direction: row;
-        width: 100%;
-        padding: 15px;
-        justify-content: space-between;
+      .container {
+        flex-direction: column;
       }
+
+      .sidebar {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+      }
+
       .sidebar img {
         width: 100px;
+        margin-bottom: 10px;
       }
+
+      .sidebar input {
+        width: 100%;
+        margin: 10px 0;
+      }
+
       .nav {
         display: flex;
-        gap: 20px;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
       }
+
       .main {
         padding: 30px 20px;
+      }
+
+      h1 {
+        font-size: 1.8em;
+      }
+
+      .desc {
+        font-size: 1em;
+      }
+
+      .playlist-list a {
+        font-size: 0.95em;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Sidebar -->
-  <div class="sidebar">
-     <div style="width: 120px; margin-bottom: 20px;">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#1db954" width="100%" height="100%">
-      <path d="M9 17.5C9 18.88 7.88 20 6.5 20S4 18.88 4 17.5 5.12 15 6.5 15 9 16.12 9 17.5zM9 5v10.1c-.58-.38-1.26-.6-2-.6-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V9l10-2v6.1c-.58-.38-1.26-.6-2-.6-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V3L9 5z"/>
-    </svg>
-  </div>
-    <!-- Input pencarian -->
-    <input type="text" id="searchInput" placeholder="🔍 Cari lagu..." />
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div style="width: 120px; margin-bottom: 20px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#1db954" width="100%" height="100%">
+          <path d="M9 17.5C9 18.88 7.88 20 6.5 20S4 18.88 4 17.5 5.12 15 6.5 15 9 16.12 9 17.5zM9 5v10.1c-.58-.38-1.26-.6-2-.6-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V9l10-2v6.1c-.58-.38-1.26-.6-2-.6-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V3L9 5z"/>
+        </svg>
+      </div>
 
-    <!-- Menu navigasi -->
-    <div class="nav">
-      <a href="index.html" class="active">🏠 Home</a>
-      <a href="playlist1.html">🎵 Playlist 1</a>
-      <a href="playlist2.html">🎶 Playlist 2</a>
+      <!-- Input Pencarian -->
+      <input type="text" id="searchInput" placeholder="🔍 Cari lagu..." />
+
+      <!-- Menu Navigasi -->
+      <div class="nav">
+        <a href="index.html" class="active">🏠 Home</a>
+        <a href="playlist1.html">🎵 Playlist 1</a>
+        <a href="playlist2.html">🎶 Playlist 2</a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+      <h1>Selamat Datang Di Web Muhammad Faiq 👋</h1>
+      <p class="desc">Nikmati berbagai playlist estetik favoritmu dalam suasana gelap ala Spotify.</p>
+
+      <div class="playlist-list" id="playlistList">
+        <a href="playlist1.html">🎵 Playlist 1 - Lagu Cinta: Dan, Penjaga Hati, Lesung pipi, monolog, Abadi, surat cinta untuk starla, bergema sampai selamanya, perempuanku, bunga abadi, jaga selalu hatimu</a>
+        <a href="playlist2.html">🎶 Playlist 2 - Lagu Galau: Tampar, Masing Masing, Satu Bulan, Mengenangmu, Tanpa Pesan Terakhir</a>
+      </div>
     </div>
   </div>
 
-  <!-- Main Content -->
-  <div class="main">
-    <h1>Selamat Datang Di Web Muhammad Faiq 👋</h1>
-    <p class="desc">Nikmati berbagai playlist estetik favoritmu dalam suasana gelap ala Spotify.</p>
-
-    <!-- Playlist utama (rekomendasi, tampil kalau input kosong) -->
-    <div class="playlist-list" id="playlistList">
-      <a href="playlist1.html">🎵 Playlist 1 - Lagu Cinta: Dan, Penjaga Hati, Lesung pipi, monolog, Abadi, surat cinta untuk starla, bergema sampai selamanya, perempuanku, bunga abadi, jaga selalu hatimu</a>
-      <a href="playlist2.html">🎶 Playlist 2 - Lagu Galau: Tampar, Masing Masing, Satu Bulan, Mengenangmu, Tanpa Pesan Terakhir</a>
-    </div>
-  </div>
-
-  <!-- Script pencarian dan redirect -->
+  <!-- Script pencarian -->
   <script>
     const searchInput = document.getElementById('searchInput');
     const playlistList = document.getElementById('playlistList');
@@ -157,7 +209,7 @@
       { title: "Tanpa Pesan Terakhir", url: "playlist2.html#tanpa-pesan-terakhir" }
     ];
 
-    // Buat datalist untuk autocomplete
+    // Datalist untuk autocomplete
     const datalist = document.createElement("datalist");
     datalist.id = "songSuggestions";
     songs.forEach(song => {
@@ -168,16 +220,12 @@
     document.body.appendChild(datalist);
     searchInput.setAttribute("list", "songSuggestions");
 
-    // Saat user ketik (input event), sembunyikan playlist utama jika ada teks di input
+    // Sembunyikan playlist saat pencarian aktif
     searchInput.addEventListener("input", () => {
-      if (searchInput.value.trim() === "") {
-        playlistList.style.display = "block";
-      } else {
-        playlistList.style.display = "none";
-      }
+      playlistList.style.display = searchInput.value.trim() === "" ? "block" : "none";
     });
 
-    // Saat user tekan Enter → redirect ke playlist & lagu yang cocok
+    // Redirect jika enter ditekan
     searchInput.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
         const query = searchInput.value.toLowerCase().trim();
@@ -190,6 +238,5 @@
       }
     });
   </script>
-
 </body>
 </html>
