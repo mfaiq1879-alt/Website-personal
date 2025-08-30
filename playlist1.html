@@ -9,7 +9,7 @@
     :root {
       --primary-bg: #121212;
       --secondary-bg: #1e1e1e;
-      --accent: #1db954; /* Spotify Green */
+      --accent: #1db954;
       --text-color: #ffffff;
       --subtext: #aaaaaa;
     }
@@ -22,12 +22,11 @@
 
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
-      min-height: 100vh;
+      background: var(--primary-bg);
+      color: var(--text-color);
       display: flex;
       justify-content: center;
       padding: 40px 20px;
-      color: var(--text-color);
     }
 
     .container {
@@ -66,6 +65,7 @@
       width: 90px;
       height: 90px;
       object-fit: cover;
+      flex-shrink: 0;
     }
 
     .info {
@@ -90,7 +90,37 @@
       filter: drop-shadow(0 0 5px var(--accent));
     }
 
+    .back-button {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .back-button a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      padding: 10px 20px;
+      background-color: #2a2a2a;
+      border-radius: 8px;
+      display: inline-block;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .back-button a:hover {
+      background-color: var(--accent);
+      color: #121212;
+    }
+
     @media (max-width: 600px) {
+      .container {
+        padding: 25px 20px;
+      }
+
+      h1 {
+        font-size: 2em;
+      }
+
       .song {
         flex-direction: column;
         align-items: flex-start;
@@ -104,19 +134,32 @@
       .info {
         padding: 15px;
       }
+
+      .info h3 {
+        font-size: 1em;
+      }
+
+      .info p {
+        font-size: 0.85em;
+      }
+
+      .back-button a {
+        width: 100%;
+        text-align: center;
+      }
     }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg" width="120" alt="Spotify Logo">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg" width="120" alt="Spotify Logo" style="display: block; margin: 0 auto 30px;" />
 
-    <h1> Playlist Cinta</h1>
+    <h1>Playlist Cinta</h1>
 
-    <!-- Lagu 1 -->
+    <!-- Lagu-lagu -->
     <div class="song" id="abadi"> 
-      <img src="abadi.jpg" alt="Cover" class="cover" alt="abadi" />
+      <img src="abadi.jpg" alt="Abadi" class="cover" />
       <div class="info">
         <h3>Abadi Indo Version</h3>
         <p>Dendi Nata</p>
@@ -126,9 +169,8 @@
       </div>
     </div>
 
-    <!-- Lagu 2 -->
     <div class="song" id="dan">
-      <img src="dan.jpg" alt="Cover" class="cover" alt="dan" />
+      <img src="dan.jpg" alt="Dan" class="cover" />
       <div class="info">
         <h3>Dan</h3>
         <p>Sheila on 7</p>
@@ -138,21 +180,19 @@
       </div>
     </div>
 
-    <!-- Lagu 3 -->
-    <div class="song" id="penjaga hati">
-      <img src="penjaga hati.jpg" alt="Cover" class="cover" alt="penjaga hati" />
+    <div class="song" id="penjaga-hati">
+      <img src="penjaga hati.jpg" alt="Penjaga Hati" class="cover" />
       <div class="info">
         <h3>Penjaga Hati</h3>
-        <p>Nadhif Basamalah</p>
+        <p>Nadhif Basalamah</p>
         <audio controls>
           <source src="nadhif basalamah - penjaga hati (Official Music Video) [jia3fhBQ8qI].mp3" type="audio/mpeg">
         </audio>
       </div>
     </div>
 
-    <!-- Lagu 4 -->
     <div class="song" id="monolog">
-      <img src="monolog.jpg" alt="Cover" class="cover" alt="monolog" />
+      <img src="monolog.jpg" alt="Monolog" class="cover" />
       <div class="info">
         <h3>Monolog</h3>
         <p>Pamungkas</p>
@@ -162,9 +202,8 @@
       </div>
     </div>
 
-    <!-- Lagu 5 -->
-    <div class="song" id="lesung pipi">
-      <img src="lesung pipi.jpg" alt="Cover" class="cover" alt="lesung pipi" />
+    <div class="song" id="lesung-pipi">
+      <img src="lesung pipi.jpg" alt="Lesung Pipi" class="cover" />
       <div class="info">
         <h3>Lesung Pipi</h3>
         <p>Raim Laode</p>
@@ -174,9 +213,8 @@
       </div>
     </div>
 
-     <!-- Lagu 6 -->
-    <div class="song" id="surat cinta untuk starla">
-      <img src="surat cinta untuk starla.jpg" alt="Cover" class="cover" alt="surat cinta untuk starla" />
+    <div class="song" id="surat-cinta-untuk-starla">
+      <img src="surat cinta untuk starla.jpg" alt="Surat Cinta Untuk Starla" class="cover" />
       <div class="info">
         <h3>Surat Cinta Untuk Starla</h3>
         <p>Virgoun</p>
@@ -186,9 +224,8 @@
       </div>
     </div>
 
-     <!-- Lagu 7 -->
-    <div class="song" id="bergema sampai selamanya">
-      <img src="bergema sampai selamanya.jpg" alt="Cover" class="cover" alt="bergema sampai selamanya" />
+    <div class="song" id="bergema-sampai-selamanya">
+      <img src="bergema sampai selamanya.jpg" alt="Bergema Sampai Selamanya" class="cover" />
       <div class="info">
         <h3>Bergema Sampai Selamanya</h3>
         <p>Nadhif Basalamah</p>
@@ -198,9 +235,8 @@
       </div>
     </div>
 
-    <!-- Lagu 8 -->
     <div class="song" id="perempuanku">
-      <img src="perempuanku.jpg" alt="Cover" class="cover" alt="perempuanku" />
+      <img src="perempuanku.jpg" alt="Perempuanku" class="cover" />
       <div class="info">
         <h3>Perempuanku</h3>
         <p>Irwansyah</p>
@@ -210,9 +246,8 @@
       </div>
     </div>
 
-    <!-- Lagu 9 -->
-    <div class="song" id="bunga abadi">
-      <img src="bunga abadi.jpg" alt="Cover" class="cover" alt="bunga abadi" />
+    <div class="song" id="bunga-abadi">
+      <img src="bunga abadi.jpg" alt="Bunga Abadi" class="cover" />
       <div class="info">
         <h3>Bunga Abadi</h3>
         <p>Rio Clappy</p>
@@ -220,11 +255,10 @@
           <source src="Bunga Abadi-Rio Clappy__ Lirik Lagu (Oh apalah arti dari semua…tanpa kehadiran nya disini) [R_LrnmJQ0hg].mp3" type="audio/mpeg">
         </audio>
       </div>
-    </div> 
+    </div>
 
-    <!-- Lagu 10 -->
-    <div class="song" id="jaga selalu hatimu">
-      <img src="jaga selalu hatimu.jpeg" alt="Cover" class="cover" alt="jaga selalu hatimu" />
+    <div class="song" id="jaga-selalu-hatimu">
+      <img src="jaga selalu hatimu.jpeg" alt="Jaga Selalu Hatimu" class="cover" />
       <div class="info">
         <h3>Jaga Selalu Hatimu</h3>
         <p>Seventeen</p>
@@ -233,24 +267,10 @@
         </audio>
       </div>
     </div>
-<div style="margin-bottom: 20px;">
-  <a href="index.html" style="
-    color: #1db954;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1rem;
-    padding: 8px 15px;
-    background-color: #2a2a2a;
-    border-radius: 8px;
-    display: inline-block;
-    transition: background 0.3s;
-  " onmouseover="this.style.background='#1db954'; this.style.color='#121212';"
-     onmouseout="this.style.background='#2a2a2a'; this.style.color='#1db954';">
-    🔙 Kembali ke Home
-  </a>
-</div>
 
-    <!-- Tambahkan lagu tambahan di sini -->
+    <div class="back-button">
+      <a href="index.html">🔙 Kembali ke Home</a>
+    </div>
 
   </div>
 
