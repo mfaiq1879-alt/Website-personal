@@ -1,242 +1,132 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Home - Playlist</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg-dark: #121212;
-      --bg-light: #1e1e1e;
-      --accent: #1db954;
-      --text: #ffffff;
-      --subtext: #aaaaaa;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--bg-dark);
-      color: var(--text);
+      margin:0; padding:0;
+      font-family:'Poppins', sans-serif;
+      background:linear-gradient(135deg,#ffb6c1,#ff69b4,#ff1493);
+      color:#fff;
+      height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      overflow:hidden;
     }
-
-    .container {
-      display: flex;
-      flex-direction: row;
-      width: 100%;
-      min-height: 100vh;
-    }
-
-    .sidebar {
-      width: 240px;
-      background: var(--bg-light);
-      padding: 30px 20px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .sidebar img {
-      width: 120px;
-      margin-bottom: 20px;
-    }
-
-    .sidebar input {
-      margin-bottom: 20px;
-      padding: 10px 12px;
-      border-radius: 8px;
-      border: none;
-      background: #1f1f1f;
-      color: white;
-      width: 100%;
-      font-size: 0.9rem;
-    }
-
-    .nav a {
-      text-decoration: none;
-      color: var(--subtext);
-      padding: 12px 0;
-      display: block;
-      font-weight: 500;
-      transition: 0.2s;
-    }
-
-    .nav a:hover,
-    .nav a.active {
-      color: var(--accent);
-    }
-
-    .main {
-      flex: 1;
-      padding: 60px 40px;
-    }
-
     h1 {
-      font-size: 2.5em;
-      color: var(--accent);
-      margin-bottom: 20px;
+      font-size:4em;
+      margin:0;
+      opacity:0; transform:scale(0.8);
+      animation:zoomIn 2s forwards;
+      text-shadow:0 0 20px rgba(255,255,255,0.8);
+    }
+    p {
+      font-size:1.5em; margin-top:20px;
+      opacity:0; animation:fadeIn 3s forwards 1s;
+    }
+    @keyframes zoomIn {to{opacity:1; transform:scale(1);}}
+    @keyframes fadeIn {to{opacity:1;}}
+
+    .btn {
+      margin-top:30px;
+      padding:15px 30px;
+      border:none; border-radius:30px;
+      background:linear-gradient(45deg,#ff69b4,#ff1493);
+      color:#fff; font-size:1.2em; font-weight:600;
+      box-shadow:0 4px 10px rgba(0,0,0,0.3);
+      transition:transform 0.3s;
+      opacity:0; animation:fadeIn 2s forwards 2s;
+    }
+    .btn:hover {transform:scale(1.05);}
+
+    /* Hewan lucu */
+    .animal {
+      position:absolute; font-size:3em;
+      opacity:0; animation:popUp 3s ease forwards;
+    }
+    @keyframes popUp {
+      0% {transform:scale(0) rotate(0deg); opacity:0;}
+      40% {transform:scale(1.3) rotate(15deg); opacity:1;}
+      70% {transform:scale(1) rotate(-15deg);}
+      100% {transform:scale(0); opacity:0;}
     }
 
-    .desc {
-      font-size: 1.2em;
-      color: var(--subtext);
-      margin-bottom: 30px;
+    /* Love effect */
+    .love {
+      position:absolute; font-size:2.5em; color:#ff1493;
+      opacity:0; animation:lovePop 3s ease forwards;
+    }
+    @keyframes lovePop {
+      0% {transform:scale(0); opacity:0;}
+      40% {transform:scale(1.3); opacity:1;}
+      70% {transform:scale(1);}
+      100% {transform:scale(0); opacity:0;}
     }
 
-    .playlist-list a {
-      display: block;
-      padding: 12px 20px;
-      margin-bottom: 10px;
-      background: #1f1f1f;
-      border-radius: 10px;
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 500;
-      transition: 0.2s;
+    /* Confetti */
+    .confetti {
+      position:absolute; width:8px; height:8px;
+      border-radius:50%;
+      animation:fall 4s linear forwards;
     }
-
-    .playlist-list a:hover {
-      background: var(--accent);
-      color: #121212;
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-      }
-
-      .sidebar {
-        width: 100%;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 20px;
-      }
-
-      .sidebar img {
-        width: 100px;
-        margin-bottom: 10px;
-      }
-
-      .sidebar input {
-        width: 100%;
-        margin: 10px 0;
-      }
-
-      .nav {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        width: 100%;
-      }
-
-      .main {
-        padding: 30px 20px;
-      }
-
-      h1 {
-        font-size: 1.8em;
-      }
-
-      .desc {
-        font-size: 1em;
-      }
-
-      .playlist-list a {
-        font-size: 0.95em;
-      }
+    @keyframes fall {
+      0%{transform:translateY(0);opacity:1;}
+      100%{transform:translateY(600px);opacity:0;}
     }
   </style>
 </head>
 <body>
+  <h1>🎉 happy birthday, sayangkuuu! 💖🎂</h1>
+  <p>semoga kamu suka ya sayang sama web yang amas kasiii</p>
+  <a href="page2.html" class="btn">ayo buka sayangkuu➡️</a>
 
-  <div class="container">
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <div style="width: 120px; margin-bottom: 20px;">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#1db954" width="100%" height="100%">
-          <path d="M9 17.5C9 18.88 7.88 20 6.5 20S4 18.88 4 17.5 5.12 15 6.5 15 9 16.12 9 17.5zM9 5v10.1c-.58-.38-1.26-.6-2-.6-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V9l10-2v6.1c-.58-.38-1.26-.6-2-.6-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V3L9 5z"/>
-        </svg>
-      </div>
+  <!-- Musik latar -->
+  <audio autoplay loop>
+    <source src="I Think I Like When It Rains - WILLIS.mp3" type="audio/mpeg">
+  </audio>
 
-      <!-- Input Pencarian -->
-      <input type="text" id="searchInput" placeholder="🔍 Cari lagu..." />
-
-      <!-- Menu Navigasi -->
-      <div class="nav">
-        <a href="index.html" class="active">🏠 Home</a>
-        <a href="playlist1.html">🎵 Playlist 1</a>
-        <a href="playlist2.html">🎶 Playlist 2</a>
-      </div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="main">
-      <h1>Selamat Datang Di Web Muhammad Faiq 👋</h1>
-      <p class="desc">Nikmati berbagai playlist estetik favoritmu dalam suasana gelap ala Spotify.</p>
-
-      <div class="playlist-list" id="playlistList">
-        <a href="playlist1.html">🎵 Playlist 1 - Lagu Cinta: Dan, Penjaga Hati, Lesung pipi, monolog, Abadi, surat cinta untuk starla, bergema sampai selamanya, perempuanku, bunga abadi, jaga selalu hatimu</a>
-        <a href="playlist2.html">🎶 Playlist 2 - Lagu Galau: Tampar, Masing Masing, Satu Bulan, Mengenangmu, Tanpa Pesan Terakhir</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Script pencarian -->
   <script>
-    const searchInput = document.getElementById('searchInput');
-    const playlistList = document.getElementById('playlistList');
-
-    const songs = [
-      { title: "Abadi", url: "playlist1.html#abadi" },
-      { title: "Dan", url: "playlist1.html#dan" },
-      { title: "Penjaga Hati", url: "playlist1.html#penjaga-hati" },
-      { title: "Monolog", url: "playlist1.html#monolog" },
-      { title: "Lesung Pipi", url: "playlist1.html#lesung-pipi" },
-      { title: "surat cinta untuk starla", url: "playlist1.html#surat-cinta-untuk-starla" },
-      { title: "bergema sampai selamanya", url: "playlist1.html#bergema-sampai-selamanya" },
-      { title: "perempuanku", url: "playlist1.html#perempuanku" },
-      { title: "bunga abadi", url: "playlist1.html#bunga abadi" },
-      { title: "jaga selalu hatimu", url: "playlist1.html#jaga-selalu-hatimu" },
-      { title: "Masing Masing", url: "playlist2.html#masing-masing" },
-      { title: "Satu BUlan", url: "playlist2.html#satu-bulan" },
-      { title: "Tampar", url: "playlist2.html#tampar" },
-      { title: "Mengenangmu", url: "playlist2.html#mengenangmu" },
-      { title: "Tanpa Pesan Terakhir", url: "playlist2.html#tanpa-pesan-terakhir" }
-    ];
-
-    // Datalist untuk autocomplete
-    const datalist = document.createElement("datalist");
-    datalist.id = "songSuggestions";
-    songs.forEach(song => {
-      const option = document.createElement("option");
-      option.value = song.title;
-      datalist.appendChild(option);
-    });
-    document.body.appendChild(datalist);
-    searchInput.setAttribute("list", "songSuggestions");
-
-    // Sembunyikan playlist saat pencarian aktif
-    searchInput.addEventListener("input", () => {
-      playlistList.style.display = searchInput.value.trim() === "" ? "block" : "none";
-    });
-
-    // Redirect jika enter ditekan
-    searchInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        const query = searchInput.value.toLowerCase().trim();
-        const found = songs.find(song => song.title.toLowerCase() === query);
-        if (found) {
-          window.location.href = found.url;
-        } else {
-          alert("Lagu tidak ditemukan.");
-        }
+    window.onload = function(){
+      // Hewan lucu muncul
+      let animals = ["🐱","🐰","🐻","🐧","🐶","🦊"];
+      for(let i=0;i<4;i++){
+        let a=document.createElement("div");
+        a.className="animal";
+        a.innerText=animals[Math.floor(Math.random()*animals.length)];
+        a.style.left=Math.random()*window.innerWidth+"px";
+        a.style.top=Math.random()*window.innerHeight+"px";
+        document.body.appendChild(a);
+        setTimeout(()=>a.remove(),3000);
       }
-    });
+
+      // Love effect muncul
+      for(let i=0;i<6;i++){
+        let l=document.createElement("div");
+        l.className="love";
+        l.innerText="❤️";
+        l.style.left=Math.random()*window.innerWidth+"px";
+        l.style.top=Math.random()*window.innerHeight+"px";
+        document.body.appendChild(l);
+        setTimeout(()=>l.remove(),3000);
+      }
+
+      // Confetti
+      for(let i=0;i<40;i++){
+        let c=document.createElement("div");
+        c.className="confetti";
+        c.style.left=Math.random()*window.innerWidth+"px";
+        c.style.top="0px";
+        c.style.background=["#ff69b4","#ff1493","#ffc0cb","#fff","#ffd700"][Math.floor(Math.random()*5)];
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),4000);
+      }
+    }
   </script>
 </body>
 </html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tata Surya Pink 360° 💖🌌</title>
+  <style>
+    body { margin:0; overflow:hidden; background:#000; font-family: 'Poppins', sans-serif; }
+    canvas { display:block; }
+    .ui {
+      position:fixed; left:50%; bottom:20px; transform:translateX(-50%);
+      display:flex; gap:10px; align-items:center;
+      z-index:10;
+    }
+    .btn {
+      padding:10px 18px; border:none; border-radius:24px; cursor:pointer;
+      background:linear-gradient(45deg,#ff69b4,#ff1493); color:#fff; font-weight:700;
+      box-shadow:0 6px 16px rgba(255,105,180,0.35);
+      transition:transform .2s ease;
+    }
+    .btn:hover { transform:translateY(-2px); }
+    .label {
+      padding:8px 12px; border-radius:16px; color:#fff; font-size:.9em;
+      background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(6px);
+    }
+  </style>
+</head>
+<body>
+  <div class="ui">
+    <span class="label">Drag atau geser untuk melihat 360°</span>
+    <button class="btn" onclick="location.href='index.html'">Kembali</button>
+  </div>
+
+  <!-- Musik latar (opsional) -->
+  <audio autoplay loop>
+    <source src="Arctic Monkeys - I Wanna Be Yours - LatinHype.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Three.js (r128) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+  <script>
+    // Scene, Camera, Renderer
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x000000, 0.0025);
+
+    const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 2000);
+    camera.position.set(0, 25, 160);
+
+    const renderer = new THREE.WebGLRenderer({ antialias:true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    // Penting untuk r128: gunakan sRGB encoding
+    renderer.outputEncoding = THREE.sRGBEncoding;
+    document.body.appendChild(renderer.domElement);
+
+    // Kontrol 360°
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.06;
+    controls.rotateSpeed = 0.7;
+    controls.minDistance = 80;
+    controls.maxDistance = 280;
+
+    // Pencahayaan lembut pink
+    const ambient = new THREE.AmbientLight(0xff69b4, 0.35);
+    scene.add(ambient);
+
+    const sunLight = new THREE.PointLight(0xff1493, 2.2, 1000);
+    sunLight.position.set(0, 0, 0);
+    scene.add(sunLight);
+
+    // Matahari pink (glow di tengah)
+    const sunGeo = new THREE.SphereGeometry(18, 64, 64);
+    const sunMat = new THREE.MeshPhongMaterial({
+      color: 0xff69b4,
+      emissive: 0xff1493,
+      emissiveIntensity: 0.8,
+      shininess: 100
+    });
+    const sun = new THREE.Mesh(sunGeo, sunMat);
+    scene.add(sun);
+
+    // Glow sprite (aura)
+    const glowTexURL = 'https://threejs.org/examples/textures/sprites/glow.png';
+    const glowMat = new THREE.SpriteMaterial({
+      map: new THREE.TextureLoader().load(glowTexURL),
+      color: 0xff69b4,
+      transparent: true,
+      blending: THREE.AdditiveBlending
+    });
+    const glow = new THREE.Sprite(glowMat);
+    glow.scale.set(130, 130, 1);
+    sun.add(glow);
+
+    // Bintang background
+    const starCount = 2000;
+    const starPositions = new Float32Array(starCount * 3);
+    for (let i = 0; i < starCount; i++) {
+      starPositions[i*3 + 0] = (Math.random() - 0.5) * 2000;
+      starPositions[i*3 + 1] = (Math.random() - 0.5) * 2000;
+      starPositions[i*3 + 2] = (Math.random() - 0.5) * 2000;
+    }
+    const starGeo = new THREE.BufferGeometry();
+    starGeo.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+    const starMat = new THREE.PointsMaterial({ color: 0xff7abf, size: 1.6, sizeAttenuation: true });
+    const stars = new THREE.Points(starGeo, starMat);
+    scene.add(stars);
+
+    // Foto-foto (planet bola 3D)
+    const loader = new THREE.TextureLoader();
+    const photoUrls = [
+      'FOTO7.jpeg',
+      'FOTO8.jpeg',
+      'FOTO9.jpeg',
+      'FOTO10.jpeg',
+      'FOTO11.jpeg',
+      'FOTO12.jpeg'
+    ];
+
+    const planets = [];
+    const orbits = [];
+
+    // Helper: buat cincin orbit tipis agar terlihat jalurnya
+    function makeOrbitRing(radius, color = 0xff4fa0) {
+      const ringGeo = new THREE.RingGeometry(radius - 0.2, radius + 0.2, 128);
+      const ringMat = new THREE.MeshBasicMaterial({ color, side: THREE.DoubleSide, transparent: true, opacity: 0.35 });
+      const ring = new THREE.Mesh(ringGeo, ringMat);
+      ring.rotation.x = Math.PI / 2;
+      scene.add(ring);
+      return ring;
+    }
+
+    photoUrls.forEach((url, i) => {
+      const tex = loader.load(
+        url,
+        () => console.log("✅ Loaded:", url),
+        undefined,
+        (err) => console.error("❌ Failed to load:", url, err)
+      );
+      // Gunakan encoding yang benar untuk r128
+      tex.encoding = THREE.sRGBEncoding;
+
+      const radius = 50 + i * 25;       // jarak dari matahari
+      const size = 9 - i * 0.8;         // ukuran planet (sedikit mengecil keluar)
+      const speed = 0.008 + i * 0.002;  // kecepatan orbit
+
+      const geo = new THREE.SphereGeometry(size, 48, 48);
+      const mat = new THREE.MeshPhongMaterial({
+        map: tex,
+        shininess: 30,
+        specular: 0x222222
+      });
+      const planet = new THREE.Mesh(geo, mat);
+
+      // Mulai di posisi acak di orbit
+      const phase = Math.random() * Math.PI * 2;
+      planet.userData = { radius, speed, phase };
+      planet.position.set(
+        Math.cos(phase) * radius,
+        (i % 2 === 0 ? 2 : -2),  // sedikit variasi elevasi
+        Math.sin(phase) * radius
+      );
+
+      scene.add(planet);
+      planets.push(planet);
+
+      // Tambahkan ring orbit visual
+      const ring = makeOrbitRing(radius);
+      orbits.push(ring);
+    });
+
+    // Sedikit rotasi matahari untuk hidup
+    let t = 0;
+
+    // Animasi loop
+    function animate() {
+      requestAnimationFrame(animate);
+
+      t += 0.005;
+      sun.rotation.y += 0.002;
+      glow.material.opacity = 0.7 + Math.sin(t) * 0.2; // berdenyut lembut
+
+      // Gerakkan planet mengelilingi matahari
+      const now = performance.now() * 0.001;
+      planets.forEach((p) => {
+        const r = p.userData.radius;
+        const s = p.userData.speed;
+        const ph = p.userData.phase;
+        p.position.x = Math.cos(now * s + ph) * r;
+        p.position.z = Math.sin(now * s + ph) * r;
+        p.rotation.y += 0.01; // rotasi diri agar foto terasa 3D
+      });
+
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // Responsif
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>
