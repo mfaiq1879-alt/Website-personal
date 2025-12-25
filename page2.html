@@ -98,7 +98,9 @@
   <a href="page3.html" class="btn">Buka lagi sayang ➡️</a>
 
   <!-- Tombol musik -->
-  <button id="musikBtn" class="btn" onclick="document.getElementById('musik').play()">🎵 Putar Musik</button>
+  <div id="scrollTarget">
+    <button id="musikBtn" class="btn" onclick="document.getElementById('musik').play()">🎵 Putar Musik</button>
+  </div>
   <audio id="musik" loop>
     <source src="coldplay - Fix You (Lyrics) - Dan Music.mp3" type="audio/mpeg">
   </audio>
@@ -115,9 +117,11 @@
       setTimeout(()=>heart.remove(),6000);
     },700);
 
-    // Auto scroll ke tombol musik saat halaman dibuka
+    // Auto scroll ke tombol musik setelah halaman siap
     window.onload = function(){
-      document.getElementById("musikBtn").scrollIntoView({behavior:"smooth"});
+      setTimeout(() => {
+        document.getElementById("scrollTarget").scrollIntoView({behavior:"smooth"});
+      }, 100); // delay kecil agar layout sempat dirender
     }
   </script>
 </body>
