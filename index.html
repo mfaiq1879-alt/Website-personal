@@ -42,6 +42,8 @@
       box-shadow:0 4px 10px rgba(0,0,0,0.3);
       transition:transform 0.3s;
       opacity:0; animation:fadeIn 2s forwards 2s;
+      max-width:90%; /* biar tidak melebar di HP */
+      word-wrap:break-word;
     }
     .btn:hover {transform:scale(1.05);}
 
@@ -79,15 +81,23 @@
       0%{transform:translateY(0);opacity:1;}
       100%{transform:translateY(600px);opacity:0;}
     }
+
+    /* Responsive untuk HP */
+    @media (max-width: 600px) {
+      h1 {font-size:2em;}
+      p {font-size:1em;}
+      .btn {font-size:1em; padding:10px 20px;}
+    }
   </style>
 </head>
 <body>
-  <h1>🎉 happy birthday, sayangkuuu! 💖🎂</h1>
-  <p>semoga kamu suka ya sayang sama web yang amas kasiii</p>
-  <a href="page2.html" class="btn">ayo buka sayangkuu➡️</a>
+  <h1>🎉 Happy Birthday, sayangkuuu! 💖🎂</h1>
+  <p>Semoga kamu suka ya sayang sama web yang amas kasiii</p>
+  <a href="page2.html" class="btn">Ayo buka sayangkuu ➡️</a>
 
-  <!-- Musik latar -->
-  <audio autoplay loop>
+  <!-- Tombol musik (lebih aman di HP) -->
+  <button class="btn" onclick="document.getElementById('musik').play()">🎵 Putar Musik</button>
+  <audio id="musik" loop>
     <source src="I Think I Like When It Rains - WILLIS.mp3" type="audio/mpeg">
   </audio>
 
@@ -99,8 +109,8 @@
         let a=document.createElement("div");
         a.className="animal";
         a.innerText=animals[Math.floor(Math.random()*animals.length)];
-        a.style.left=Math.random()*window.innerWidth+"px";
-        a.style.top=Math.random()*window.innerHeight+"px";
+        a.style.left=Math.random()*90+"vw";
+        a.style.top=Math.random()*80+"vh";
         document.body.appendChild(a);
         setTimeout(()=>a.remove(),3000);
       }
@@ -110,8 +120,8 @@
         let l=document.createElement("div");
         l.className="love";
         l.innerText="❤️";
-        l.style.left=Math.random()*window.innerWidth+"px";
-        l.style.top=Math.random()*window.innerHeight+"px";
+        l.style.left=Math.random()*90+"vw";
+        l.style.top=Math.random()*80+"vh";
         document.body.appendChild(l);
         setTimeout(()=>l.remove(),3000);
       }
@@ -120,7 +130,7 @@
       for(let i=0;i<40;i++){
         let c=document.createElement("div");
         c.className="confetti";
-        c.style.left=Math.random()*window.innerWidth+"px";
+        c.style.left=Math.random()*90+"vw";
         c.style.top="0px";
         c.style.background=["#ff69b4","#ff1493","#ffc0cb","#fff","#ffd700"][Math.floor(Math.random()*5)];
         document.body.appendChild(c);
