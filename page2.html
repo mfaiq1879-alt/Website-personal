@@ -11,15 +11,14 @@
       font-family:'Poppins', sans-serif;
       background:linear-gradient(135deg,#ffb6c1,#ff69b4,#ff1493);
       display:flex; flex-direction:column;
-      justify-content:center; align-items:center;
-      min-height:100vh; overflow:hidden;
-      color:#fff;
+      justify-content:flex-start; align-items:center;
+      min-height:100vh; color:#fff;
       text-align:center;
     }
     h2 {
       font-size:2.2em; font-weight:700;
       text-shadow:0 0 15px rgba(255,255,255,0.7);
-      margin-bottom:20px;
+      margin:20px 0;
       animation:fadeInDown 1.5s ease forwards;
     }
     @keyframes fadeInDown {
@@ -41,20 +40,14 @@
     }
     @keyframes fadeIn {from{opacity:0;}to{opacity:1;}}
 
-    /* Custom scrollbar warna pink */
+    /* Custom scrollbar */
     .note::-webkit-scrollbar {width:8px;}
-    .note::-webkit-scrollbar-track {
-      background:rgba(255,255,255,0.1);
-      border-radius:10px;
-    }
-    .note::-webkit-scrollbar-thumb {
-      background:#ff69b4;
-      border-radius:10px;
-    }
+    .note::-webkit-scrollbar-track {background:rgba(255,255,255,0.1); border-radius:10px;}
+    .note::-webkit-scrollbar-thumb {background:#ff69b4; border-radius:10px;}
     .note::-webkit-scrollbar-thumb:hover {background:#ff1493;}
 
     .btn {
-      margin-top:25px; padding:12px 25px;
+      margin-top:20px; padding:12px 25px;
       border:none; border-radius:30px;
       background:linear-gradient(45deg,#ff69b4,#ff1493);
       color:#fff; font-size:1.1em; font-weight:700;
@@ -75,7 +68,7 @@
       100% {transform:translateY(-600px); opacity:0;}
     }
 
-    /* Responsive untuk HP */
+    /* Responsive HP */
     @media (max-width:600px){
       h2 {font-size:1.5em;}
       .note {font-size:1em; padding:15px;}
@@ -101,10 +94,11 @@
     sehat sehat ya sayangku, cintaku, duniaku, rumahku, semestakuu 🌹💖 <br>
     i lovee u sekebonn babyy!!!💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖💖
   </div>
+
   <a href="page3.html" class="btn">Buka lagi sayang ➡️</a>
 
-  <!-- Tombol musik (lebih aman di HP) -->
-  <button class="btn" onclick="document.getElementById('musik').play()">🎵 Putar Musik</button>
+  <!-- Tombol musik -->
+  <button id="musikBtn" class="btn" onclick="document.getElementById('musik').play()">🎵 Putar Musik</button>
   <audio id="musik" loop>
     <source src="coldplay - Fix You (Lyrics) - Dan Music.mp3" type="audio/mpeg">
   </audio>
@@ -120,6 +114,11 @@
       document.body.appendChild(heart);
       setTimeout(()=>heart.remove(),6000);
     },700);
+
+    // Auto scroll ke tombol musik saat halaman dibuka
+    window.onload = function(){
+      document.getElementById("musikBtn").scrollIntoView({behavior:"smooth"});
+    }
   </script>
 </body>
 </html>
